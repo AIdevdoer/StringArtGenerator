@@ -1,0 +1,13 @@
+{
+  "name": "stringartgenerator",
+  "version": "1.0.0",
+  "description": "Web based string art generator",
+  "main": "index.html",
+  "scripts": {
+    "serve": "http-server -p 8080",
+    "go:run": "go run main.go"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

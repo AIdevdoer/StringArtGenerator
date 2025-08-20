@@ -6,8 +6,65 @@
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="manifest" href="manifest.webmanifest">
+        <link rel="icon" href="test2.gif">
+        <link rel="apple-touch-icon" href="test2.gif">
 
-        <title>String Art Generator</title>
+        <title>String Art Generator — Free Online Line/Nail Art Maker</title>
+        <meta name="description" content="Free string art line art generator to create printable designs.">
+        <meta property="og:title" content="String Art Generator — Free Online Line/Nail Art Maker">
+        <meta property="og:description" content="Free string art line art generator to create printable designs.">
+        <meta property="og:type" content="website">
+        <meta property="og:image" content="test2.gif">
+        <meta property="og:url" content="https://example.com/">
+        <meta name="twitter:card" content="summary_large_image">
+        <link rel="canonical" href="https://example.com/">
+        <link rel="alternate" hreflang="en" href="https://example.com/">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js" integrity="sha512-3yBHcS4iYwGY8msd9rsbe0H3jVFe0w1XzuIifTsXa9oaZMtdD3id5wEeJJv14tgN4Kt9e6Y1BRgNdNtC6PBuXQ==" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-C/e08RSbVSSMzdg3NofM8JrIoVNewc19hXtOD87mpy4V/mQJu1nvLKYj1WFJsbgx5caX5/C/PObbIVdQyPqV0w==" crossorigin="anonymous"></script>
+
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebApplication",
+              "name": "String Art Generator",
+              "applicationCategory": "Art, Design"
+            },
+            {
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "How do I export the result?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Use the Export buttons to download SVG, PNG or PDF files."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Any printing suggestions?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Print at high DPI on thick paper for best results."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "How many nails should I use?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Common projects use between 200 and 400 pins depending on detail needed."
+                  }
+                }
+              ]
+            }
+          ]
+        }
+        </script>
     </head>
 <body>
     <div class="container">
@@ -15,9 +72,9 @@
             <div style="float: left; position: absolute; top: 20px;">
                 <a href="https://github.com/halfmonty/StringArtGenerator">Find on Github</a>
             </div>
-            <h1>String Art Generator</h1>
+            <h1>String Art Generator <small id="buildInfo"></small></h1>
             <div style="float: right; margin-top: -40px;">
-                Already have steps generated? 
+                Already have steps generated?
                 <button class="btn btn-primary" onclick="onHasSteps();">Click Here</button>
             </div>
             <h2 id="status">Please wait: loading...</h2><br/>
@@ -68,6 +125,16 @@
                     <div id="drawStatus"></div>
                     <canvas class="centerCanvasLarge" id="canvasOutput2" ></canvas>
                 </div>
+                <div id="exportSection" class="centerBorderless">
+                    <h3>Export</h3>
+                    <button class="btn btn-secondary" onclick="exportSVG();">SVG</button>
+                    <button class="btn btn-secondary" onclick="exportPNG();">PNG</button>
+                    <button class="btn btn-secondary" onclick="exportPDF();">PDF</button>
+                    <span id="exportSize"></span>
+                    <div style="margin-top:10px;">
+                        <button class="btn btn-secondary" onclick="shareLink();">Share Link</button>
+                    </div>
+                </div>
                 <div id="showPins" class="inputoutput center hidden">
                     <textarea id="pinsOutput" rows="10" cols="100"></textarea>
                     <div class="centerBorderless">
@@ -99,6 +166,9 @@
 
     </div>
 
+    <footer style="text-align:center;margin-top:20px;">
+        &copy; 2024 String Art Generator. Based on <a href="https://github.com/halfmonty/StringArtGenerator">halfmonty/StringArtGenerator</a>.
+    </footer>
 
 
 <script type="text/javascript">
@@ -119,6 +189,7 @@ let imgElement = document.getElementById("imageSrc")
 let inputElement = document.getElementById("fileInput");
 inputElement.addEventListener("change", (e) => {
   imgElement.src = URL.createObjectURL(e.target.files[0]);
+  track('generate');
 }, false);
 var ctx=document.getElementById("canvasOutput").getContext("2d");
 var ctx2=document.getElementById("canvasOutput2").getContext("2d");
@@ -708,5 +779,21 @@ function onOpenCvReady() {
 <script src="https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="exporter.js"></script>
+<script>
+document.getElementById('buildInfo').textContent = 'v0.1-BETA (2025-08-20T02:06:22Z)';
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').then(function(reg){
+    console.log('Service Worker registered');
+    if (reg.installing) {
+      reg.installing.addEventListener('statechange', function(e){
+        if (e.target.state === 'installed') {
+          alert('Offline ready');
+        }
+      });
+    }
+  });
+}
+</script>
 </body>
 </html>

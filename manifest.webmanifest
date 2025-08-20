@@ -1,0 +1,12 @@
+{
+  "name": "String Art Generator",
+  "short_name": "StringArt",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {"src": "test2.gif", "sizes": "192x192", "type": "image/gif"},
+    {"src": "test2.gif", "sizes": "512x512", "type": "image/gif"}
+  ]
+}
